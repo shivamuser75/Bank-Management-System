@@ -3,11 +3,11 @@ import java.util.Vector;
 
 class BankCustomerData{
     public String AcountNumber;
-    private String Name;
-    private String Address;
+    public String Name;
+    public String Address;
     public String userId;
     private String passWord;
-    private String mobileNum;
+    public String mobileNum;
     int cnt=0;
     class balance{
 
@@ -130,7 +130,8 @@ public class BankAcoutns {
             System.out.println("3.WithDraw");
             System.out.println("4.Money Transfer");
             System.out.println("5.History");
-            System.out.println("6.Exit");
+            System.out.println("6.user Datails");
+            System.out.println("7.Exit");
             choice = sc.nextInt();
 
             if (choice == 1) {
@@ -180,7 +181,21 @@ public class BankAcoutns {
                     System.out.println(balData.get(index).history[i][0] + " " + balData.get(index).history[i][1]);
                 }
             }
-        }while (choice!=6);
+            else if (choice == 6) {
+                System.out.println("-----------------------------------");
+                System.out.println("        USER ACCOUNT DETAILS       ");
+                System.out.println("-----------------------------------");
+                System.out.printf("%-20s: %s%n", "Account Holder Name", obj.Name);
+                System.out.printf("%-20s: %s%n", "Account Number", obj.AcountNumber);
+                System.out.printf("%-20s: %s%n", "Account Type", "Savings");  // Assuming account type is fixed as Savings
+                System.out.printf("%-20s: $%,.2f%n", "Balance", (double)balData.get(index).getbal());  // Display balance in currency format
+                System.out.printf("%-20s: %s%n", "Date of Creation", "01/01/2021");  // You can replace this with actual creation date
+                System.out.printf("%-20s: %s%n", "Contact Info", obj.mobileNum);  // Assuming mobile number is contact info
+                System.out.println("-----------------------------------");
+            }
+
+        }while (choice!=7);
+
 
 
     }
