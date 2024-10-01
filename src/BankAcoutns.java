@@ -118,20 +118,28 @@ public class BankAcoutns {
 
     }
 
-    public void LoginCustomer(BankCustomerData obj,int index){
+    public void LoginCustomer(BankCustomerData obj, int index) {
         Scanner sc = new Scanner(System.in);
 
-
+        // Display basic information of the user when logged in
+        System.out.println("-----------------------------------");
+        System.out.println("        USER DASHBOARD             ");
+        System.out.println("-----------------------------------");
+        System.out.printf("%-20s: %s%n", "Account Holder Name", obj.Name);
+        System.out.printf("%-20s: %s%n", "Account Number", obj.AcountNumber);
+        System.out.printf("%-20s: $%,.2f%n", "Current Balance", (double) balData.get(index).getbal());
+        System.out.println("-----------------------------------");
+        System.out.println();
 
         int choice;
         do {
-            System.out.println("1.Account Balance");
-            System.out.println("2.Deposit");
-            System.out.println("3.WithDraw");
-            System.out.println("4.Money Transfer");
-            System.out.println("5.History");
-            System.out.println("6.user Datails");
-            System.out.println("7.Exit");
+            System.out.println("1. Account Balance");
+            System.out.println("2. Deposit");
+            System.out.println("3. Withdraw");
+            System.out.println("4. Money Transfer");
+            System.out.println("5. History");
+            System.out.println("6. User Details");
+            System.out.println("7. Exit");
             choice = sc.nextInt();
 
             if (choice == 1) {
@@ -146,59 +154,47 @@ public class BankAcoutns {
                 balData.get(index).history[obj.cnt][1] = "Deposit";
                 obj.cnt++;
 
-
             } else if (choice == 3) {
                 System.out.println("Withdraw Amount : ");
                 int withdraw = sc.nextInt();
                 balData.get(index).withdraw(withdraw);
                 System.out.println("Your Account Balance : " + balData.get(index).getbal());
 
-            }
-            else if(choice==4){
-
+            } else if (choice == 4) {
                 System.out.print("Account Number to transfer : ");
                 int acnt = sc.nextInt();
 
-                if(acntNumValid(acnt)){
+                if (acntNumValid(acnt)) {
                     System.out.print("Amount to transfer : ");
                     int amt = sc.nextInt();
-                    if(balData.get(index).getbal()>=amt){
+                    if (balData.get(index).getbal() >= amt) {
                         balData.get(getAcntNumIdex()).setBal(amt);
                         balData.get(index).transfer(amt, custData.get(getAcntNumIdex()).toString());
                         System.out.println("Transfer successfully");
                         System.out.println("Your Account Balance : " + balData.get(index).getbal());
                     }
 
-                }
-                else {
+                } else {
                     System.out.print("Invalid Account Number..");
                 }
 
-
-            }
-            else if (choice == 5) {
+            } else if (choice == 5) {
                 for (int i = 0; i < balData.get(index).history.length; i++) {
                     System.out.println(balData.get(index).history[i][0] + " " + balData.get(index).history[i][1]);
                 }
-            }
-            else if (choice == 6) {
-                System.out.println("-----------------------------------");
-                System.out.println("        USER ACCOUNT DETAILS       ");
+            } else if (choice == 6) {
+                System.out.println("User Details:");
                 System.out.println("-----------------------------------");
                 System.out.printf("%-20s: %s%n", "Account Holder Name", obj.Name);
                 System.out.printf("%-20s: %s%n", "Account Number", obj.AcountNumber);
-                System.out.printf("%-20s: %s%n", "Account Type", "Savings");  // Assuming account type is fixed as Savings
-                System.out.printf("%-20s: $%,.2f%n", "Balance", (double)balData.get(index).getbal());  // Display balance in currency format
-                System.out.printf("%-20s: %s%n", "Date of Creation", "01/01/2021");  // You can replace this with actual creation date
-                System.out.printf("%-20s: %s%n", "Contact Info", obj.mobileNum);  // Assuming mobile number is contact info
+                System.out.printf("%-20s: $%,.2f%n", "Balance", (double) balData.get(index).getbal());
+                System.out.printf("%-20s: %s%n", "Address", obj.Address);
+                System.out.printf("%-20s: %s%n", "Phone Number", obj.mobileNum);
                 System.out.println("-----------------------------------");
             }
-
-        }while (choice!=7);
-
-
-
+        } while (choice != 7);
     }
+
     public void adminLogin(){
         Scanner sc = new Scanner(System.in);
         int ch;
