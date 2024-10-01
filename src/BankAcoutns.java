@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -26,12 +28,29 @@ class BankCustomerData{
             this.bal = dep;
         }
         public void withdraw(int with){
-            if(with>bal){
-                System.out.println("No have any balance");
+            if(with > bal){
+                System.out.println("Insufficient balance for this withdrawal.");
                 return;
             }
-            bal -=with;
-            System.out.println("Withdraw Successfully");
+
+            // Deducting the balance
+            bal -= with;
+
+            // Getting the current date and time
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            String currentTime = sdf.format(new Date());
+
+            // Customizing the message
+            System.out.println("---------------------------------------------------");
+            System.out.println(" Withdrawal Successful!");
+            System.out.println("---------------------------------------------------");
+            System.out.printf(" Amount Withdrawn     : $%,d%n", with);
+            System.out.printf(" Remaining Balance    : $%,d%n", bal);
+            System.out.println(" Date and Time        : " + currentTime);
+            System.out.println("---------------------------------------------------");
+            System.out.println(" Thank you for using our services. Please come again!");
+
+            // Store in history
             history[cnt][0] = String.valueOf(with);
             history[cnt][1] = "Withdraw";
             cnt++;
